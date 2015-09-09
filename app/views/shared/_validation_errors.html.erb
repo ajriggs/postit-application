@@ -1,0 +1,15 @@
+<% if submission.errors.any? %>
+  <div class='row'>
+    <div class='alert-error span8'>
+      <h5>
+        Your submission contains <%= "#{pluralize(submission.errors.count, 'error')}"%>. Please update before trying again.
+      </h5>
+      <ul>
+        <% submission.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+<% end %>

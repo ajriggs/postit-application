@@ -1,3 +1,7 @@
+<p class ='pull-right'>
+  [<%= link_to 'Edit Post', edit_post_path %>]
+</p>
+
 <p>
   <%= render @post.categories %>
 </p>
@@ -6,3 +10,14 @@
   <%= @post.description %>
   <hr />
 </p>
+
+  <%= form_for [@post, @comment] do |f| %>
+  <div class='control-group'>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+    <br/>
+    <%= f.submit 'Share', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= render @post.comments %>
