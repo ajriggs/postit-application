@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.category_ids = params[:post][:category_ids]
     @post.author = User.first #temporary, until authentication works
     if @post.save
       flash[:notice] = "Thanks for sharing your thoughts!"
@@ -30,6 +31,8 @@ class PostsController < ApplicationController
 
   def update
     @post.update(post_params)
+    @post.category_ids = params[:post][:category_ids]
+    binding.pry
     if @post.save
       flash[:notice] = "Thanks for sharing your thoughts!"
       redirect_to posts_path

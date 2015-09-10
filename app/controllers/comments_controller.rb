@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.new(params.require(:comment).permit(:body))
-    @comment.post_id = params[:post_id]
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.author = User.first #temporary until authentication works
-    @post = @comment.post
     if @comment.save
       flash[:notice] = 'Your comment was posted'
       redirect_to post_path(@post)

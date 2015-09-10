@@ -1,6 +1,7 @@
 <div class='row'>
-    <div class='well span 8'>
-    <p><%= comment.body %></p>
-    <p><span class='quiet'>by</span> <%= comment.author.username %> at <%= comment.created_at %>
+  <div class='well span 8'>
+    <em>"<%= comment.body %>"</em>
+    <br/>
+    <span class='quiet'>by</span> <%= link_to comment.author.username, '' %> at <small><%= comment.created_at %></small>
   </div>
 </div>
