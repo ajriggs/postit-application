@@ -16,7 +16,6 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.category_ids = params[:post][:category_ids]
     @post.author = User.first #temporary, until authentication works
     if @post.save
       flash[:notice] = "Thanks for sharing your thoughts!"
@@ -31,8 +30,6 @@ class PostsController < ApplicationController
 
   def update
     @post.update(post_params)
-    @post.category_ids = params[:post][:category_ids]
-    binding.pry
     if @post.save
       flash[:notice] = "Thanks for sharing your thoughts!"
       redirect_to posts_path
@@ -44,7 +41,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
   end
 
   def fetch_post

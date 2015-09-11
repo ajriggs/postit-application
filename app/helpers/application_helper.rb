@@ -1,6 +1,14 @@
 module ApplicationHelper
   def fix_url(str)
-    str.url.start_with?('http://') ? str : str.prepend('http://')
+    if str.start_with?('http://') || str.start_with?('https://')
+      str
+    else
+      str.prepend('http://')
+    end
+  end
+
+  def format_datetime(datetime)
+    datetime.strftime("%D %r %Z")
   end
 
   # needs tinkering, but I do feel like this logic could be put into a helper, maybe?

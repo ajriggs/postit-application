@@ -5,7 +5,7 @@
 <p>
   <%= render @post.categories %>
 </p>
-  <%= render 'shared/content_title', title: @post.title %>
+  <%= render 'shared/content_title', title: link_to(@post.title, fix_url(@post.url)) %>
 <p>
   <%= @post.description %>
 </p>
@@ -21,4 +21,5 @@
 <% end %>
 
 <h5>Comments:</h5>
+<% @post.comments.reload %>
 <%= render @post.comments %>
