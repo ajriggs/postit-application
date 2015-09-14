@@ -16,11 +16,12 @@ class CommentsController < ApplicationController
 
   def vote
     comment = Comment.find(params[:id])
-    if comment.votes.create(vote: params[:vote], user: current_user, voteable: @comment)
+    vote = comment.votes.create(vote: params[:vote], user: current_user, voteable: @comment)
+    if vote.valid?
       flash[:notice] = 'Vote tallied'
       redirect_to(:back)
     else
-      flash[:notice] = 'Oops! Something went wrong. Try again?'
+      flash[:error] = 'Oops! Something went wrong. Try again? Note: you cannot vote on anything more than once.'
       redirect_to(:back)
     end
   end

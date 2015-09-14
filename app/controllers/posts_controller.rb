@@ -38,11 +38,12 @@ class PostsController < ApplicationController
   end
 
   def vote
-    if @post.votes.create(vote: params[:vote], user: current_user, voteable: @post)
+    vote = @post.votes.create(vote: params[:vote], user: current_user, voteable: @post)
+    if vote.valid?
       flash[:notice] = 'Vote tallied'
       redirect_to(:back)
     else
-      flash[:notice] = 'Oops! Something went wrong. Try again?'
+      flash[:error] = "Oops! Something went wrong. Try again? Note: you cannot vote on anything more than once."
       redirect_to(:back)
     end
   end
