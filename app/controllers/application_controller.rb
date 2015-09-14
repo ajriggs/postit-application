@@ -19,16 +19,5 @@ class ApplicationController < ActionController::Base
       redirect_to posts_path
     end
   end
-
-  def sorted_posts(user = false)
-    if user
-      @user.posts.all.sort_by{ |x| x.net_votes }.reverse
-    else
-      Post.all.sort_by{ |x| x.net_votes }.reverse
-    end
-  end
-
-  def sorted_comments(parent_asset)
-    parent_asset.comments.all.sort_by{ |x| x.net_votes }.reverse
-  end
+  
 end

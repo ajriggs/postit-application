@@ -20,4 +20,12 @@ class Post < ActiveRecord::Base
   def net_votes
     upvotes - downvotes
   end
+
+  def self.sorted_index
+      Post.all.sort_by{ |x| x.net_votes }.reverse
+  end
+
+  def sorted_comments
+    self.comments.all.sort_by{ |x| x.net_votes }.reverse
+  end
 end

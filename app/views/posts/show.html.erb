@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<% if logged_in? && author %>
   <p class ='pull-right'>
     [<%= link_to 'Edit Post', edit_post_path(@post) %>]
   </p>
@@ -7,8 +7,10 @@
 <p>
   <%= render @post.categories %>
 </p>
+
 <% header = "#{link_to 'All Posts', posts_path} &raquo; #{link_to(@post.title, fix_url(@post.url))}".html_safe %>
-  <%= render 'shared/content_title', title: header %>
+<%= render 'shared/content_title', title: header %>
+
 <p>
   <%= @post.description %>
 </p>
@@ -27,4 +29,4 @@
 
 <h5>Comments:</h5>
 <% @post.comments.reload %>
-<%= render sorted_comments(@post), post: @post %>
+<%= render @post.sorted_comments, post: @post %>
