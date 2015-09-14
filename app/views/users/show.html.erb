@@ -1,0 +1,28 @@
+<%= render 'shared/content_title', title: "Profile: #{@user.username}" %>
+
+<div class='well'>
+  <dl class='dl-horizontal'>
+    <dt>Username:</dt>
+    <dd><%= @user.username %></dd>
+    <dt>Time Zone:</dt>
+    <dd>coming soon!<dd>
+  </dl>
+</div>
+
+<h5><%= @user.username %>'s activity:</h5>
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#user_posts" data-toggle="tab">Posts (<%= @user.posts.size %>)</a></li>
+    <li><a href="#user_comments" data-toggle="tab">Comments (<%= @user.comments.size %>)</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="user_posts">
+      <% sorted_posts = @user.posts.all.sort_by{|x| x.net_votes}.reverse %>
+      <%= render sorted_posts(user = true) %>
+    </div>
+    <div class="tab-pane" id="user_comments">
+      <%= render sorted_comments(@user), refer_to_post: true %>
+    </div>
+  </div>
+</div>
