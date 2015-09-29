@@ -1,0 +1,7 @@
+<% if @vote.valid? %>
+  $('#post_<%= @post.slug %>_votes').html('<%= pluralize(@post.net_votes, "vote") %>');
+<% else %>
+  $('#main').before("<div class='alert alert-error'>\
+  <a class='close' data-dismiss='alert'>x</a>\
+  <div>You can only vote once.</div></div>");
+<% end %>

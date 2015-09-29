@@ -40,14 +40,21 @@ class PostsController < ApplicationController
     end
   end
 
+
+  # need to figure out how to get my error messages back after ajaxifying this code
   def vote
-    vote = @post.votes.create(vote: params[:vote], user: current_user, voteable: @post)
-    if vote.valid?
-      flash[:notice] = 'Vote tallied'
-      redirect_to :back
-    else
-      flash[:error] = "Oops! Something went wrong. Try again? Note: you cannot vote on anything more than once."
-      redirect_to(:back)
+    @vote = @post.votes.create(vote: params[:vote], user: current_user, voteable: @post)
+
+    respond_to do |format|
+      format.html do
+        if @vote.valid?
+          flash[:notice] = "Your vote was counted."
+        else
+          flash[:error] = 'Oops! Something went wrong.'
+        end
+        redirect_to :back
+      end
+      format.js
     end
   end
 
@@ -58,15 +65,11 @@ class PostsController < ApplicationController
   end
 
   def fetch_post
-    @post = Post.find(params[:id])
-  end
-
-  def author
-    @post.author == current_user
+    @post = Post.find_by(slug: params[:id])
   end
 
   def require_author
-    unless author
+    unless authored_by_user?
       flash[:error] = 'You cannot edit a post you did not author.'
       redirect_to post_path(@post)
     end
