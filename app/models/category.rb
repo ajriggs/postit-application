@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
   has_many :post_categories, foreign_key: :category_id
   has_many :posts, through: :post_categories
 
-  before_save :render_unique_slug
+  before_save :render_unique_slug!
 
   validates :name, presence: true, length: {minimum: 3}, uniqueness: true
 
@@ -22,7 +22,7 @@ class Category < ActiveRecord::Base
     end
   end
 
-  def render_unique_slug
+  def render_unique_slug!
     new_slug = to_slug(self)
     duplicate = Category.find_by slug: new_slug
     while duplicate && duplicate != self

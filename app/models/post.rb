@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :post_categories
   has_many :votes, as: :voteable
 
-  before_create :render_unique_slug
+  before_create :render_unique_slug!
 
   validates :title, presence: true, length: {minimum: 5}
   validates :url, presence: true, uniqueness: true
@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def render_unique_slug
+  def render_unique_slug!
     new_slug = to_slug(self)
     duplicate = Post.find_by slug: new_slug
     while duplicate && duplicate != self
