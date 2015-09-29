@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
   end
 
   def to_slug(category)
-    category.name.downcase.gsub(/[\W]/, '-').gsub(/-+/, '-')
+    category.name.downcase.gsub(/[\W_]/, '-').gsub(/-+/, '-')
   end
 
   def append_suffix(slug)

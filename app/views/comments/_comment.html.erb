@@ -6,7 +6,7 @@
     <% end %>
     <br/>
   <% end %>
-  <span id='comment_<%= comment.slug %>_votes'><%= "#{pluralize(comment.net_votes, 'vote')}" %></span>
+  <span id='comment_<%= comment.id %>_votes'><%= "#{pluralize(comment.net_votes, 'vote')}" %></span>
   <br/>
   <% if logged_in? %>
     <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true do %>

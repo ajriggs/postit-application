@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   has_many :categories, through: :post_categories
   has_many :votes, as: :voteable
 
-  before_create :render_slug
+  before_create :render_unique_slug
 
   validates :title, presence: true, length: {minimum: 5}
   validates :url, presence: true, uniqueness: true
@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
   end
 
   def to_slug(post)
-    post.title.downcase.gsub(/[\W]/, '-').gsub(/-+/, '-')
+    post.title.downcase.gsub(/[\W_]/, '-').gsub(/-+/, '-')
   end
 
   def append_suffix(slug)
@@ -45,10 +45,10 @@ class Post < ActiveRecord::Base
 
   def render_unique_slug
     new_slug = to_slug(self)
-    duplicate = Category.find_by slug: new_slug
+    duplicate = Post.find_by slug: new_slug
     while duplicate && duplicate != self
       new_slug = append_suffix(new_slug)
-      duplicate = Category.find_by slug: new_slug
+      duplicate = Post.find_by slug: new_slug
     end
     self.slug = new_slug
   end

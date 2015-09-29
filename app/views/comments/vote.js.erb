@@ -1,5 +1,5 @@
 <% if @vote.valid? %>
-  $('#comment_<%= @comment.slug %>_votes').html('<%= pluralize(@comment.net_votes, "vote") %>');
+  $('#comment_<%= @comment.id %>_votes').html('<%= pluralize(@comment.net_votes, "vote") %>');
 <% else %>
 $('#main').before("<div class='alert alert-error'>\
 <a class='close' data-dismiss='alert'>x</a>\
