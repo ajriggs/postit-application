@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
     !!session[:user_id]
   end
 
-  def authored_by_user?
-    @post.author == current_user
-  end
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if logged_in?
   end
@@ -20,6 +16,13 @@ class ApplicationController < ActionController::Base
   def require_user
     unless logged_in?
       flash[:error] = 'You must be logged in to do that.'
+      redirect_to posts_path
+    end
+  end
+
+  def require_admin
+    unless logged_in? and current_user.is_admin?
+      flash[:error] = 'You must be logged in as an admin to do that.'
       redirect_to posts_path
     end
   end

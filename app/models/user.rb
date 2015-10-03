@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
   def sorted_comments
     self.comments.all.sort_by{ |x| x.net_votes }.reverse
   end
+
+  def is_admin?
+    self.role == 'admin'
+  end
 end

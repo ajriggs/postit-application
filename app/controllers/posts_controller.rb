@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:index, :show]
   before_action :require_author, only: [:edit, :update]
 
-  helper_method :author
 
   def index
     @posts = Post.sorted_index
@@ -69,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   def require_author
-    unless authored_by_user?
+    unless logged_in? && (current_user == @post.author || current_user.is_admin?)
       flash[:error] = 'You cannot edit a post you did not author.'
       redirect_to post_path(@post)
     end

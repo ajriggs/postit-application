@@ -8,6 +8,9 @@ module ApplicationHelper
   end
 
   def format_datetime(datetime)
+    if logged_in? && !current_user.timezone.blank?
+      datetime = datetime.in_time_zone(current_user.timezone)
+    end
     datetime.strftime("%D %r %Z")
   end
 
