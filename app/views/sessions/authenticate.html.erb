@@ -1,0 +1,12 @@
+<%= render 'shared/content_title', title: 'Provide your Two-Factor PIN' %>
+<div class ='well'>
+  <%= form_tag('/authenticate', method: 'post') do %>
+    <div class='control-group'>
+      <%= label_tag :PIN %>
+      <%= text_field_tag :pin %>
+    </div>
+    <div class='control-group'>
+      <%= submit_tag('Authenticate', class: 'btn btn-success') %>
+    </div>
+  <% end %>
+</div>

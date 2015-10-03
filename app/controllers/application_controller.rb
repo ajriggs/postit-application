@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if logged_in?
   end
 
+  def access_denied
+    flash[:error] = "Oops! Something went wrong, or perhaps you just can't do that!"
+    redirect_to :back
+  end
+
   def require_user
     unless logged_in?
       flash[:error] = 'You must be logged in to do that.'
