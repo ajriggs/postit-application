@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'voteable_riggs'
+gem 'sluggable_riggs', '= 0.0.1'
 
 group :doc do
   gem 'sdoc', require: false
