@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   include Sluggable
 
-  has_many :posts, foreign_key: :user_id, dependent: :destroy
-  has_many :comments, foreign_key: :user_id, dependent: :destroy
+  has_many :posts
+  has_many :comments
 
   has_secure_password validations: false
 
@@ -38,10 +38,8 @@ class User < ActiveRecord::Base
   def send_pin_through_twilio
     account_sid = 'AC7b1cbf55335aa37003003422c11313e0'
     auth_token = '20e2dada6fc5a5930680ec42fe7c8764'
-
     # set up a client to talk to the Twilio REST API
     client = Twilio::REST::Client.new account_sid, auth_token
-
     client.account.messages.create({
     	:from => '+17604073063',
     	:to => "#{self.phone}",
