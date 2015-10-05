@@ -16,3 +16,8 @@
 //= require_tree .
 //= require bootstrap
 
+$(document).ready(function() {
+  $('.ajax_close').click(function() {
+    $('.ajax_close').parent().toggle();
+  });
+});
