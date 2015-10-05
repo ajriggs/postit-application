@@ -12,12 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 //= require bootstrap
 
 $(document).ready(function() {
   $('.ajax_close').click(function() {
-    $('.ajax_close').parent().toggle();
+    $('.ajax_close').parent().hide();
   });
 });

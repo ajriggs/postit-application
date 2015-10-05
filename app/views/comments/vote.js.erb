@@ -2,4 +2,5 @@
   $('#comment_<%= @comment.id %>_votes').html('<%= pluralize(@comment.net_votes, "vote") %>');
 <% else %>
   $('#comment_vote_error').show();
+  $('html, body').animate({ scrollTop: 0 }, 0);
 <% end %>

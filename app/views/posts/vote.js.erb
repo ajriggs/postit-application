@@ -2,4 +2,5 @@
   $('#post_<%= @post.slug %>_votes').html('<%= pluralize(@post.net_votes, "vote") %>');
 <% else %>
     $('#post_vote_error').show();
+    $('html, body').animate({ scrollTop: 0 }, 0);
 <% end %>

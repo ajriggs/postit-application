@@ -118,8 +118,6 @@ GEM
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.2.0)
-      coffee-rails
     twilio-ruby (4.4.0)
       builder (>= 2.1.2)
       jwt (~> 1.0)
@@ -148,7 +146,6 @@ DEPENDENCIES
   sdoc
   sluggable_riggs (= 0.0.1)
   sqlite3
-  turbolinks
   twilio-ruby
   uglifier (>= 1.3.0)
   voteable_riggs

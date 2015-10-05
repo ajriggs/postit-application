@@ -25,9 +25,17 @@
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="user_posts">
+    <div id='post_vote_error' class='alert alert-error' style='display:none'>
+      <a class='close ajax_close'>x</a>
+      <span>You can only vote once.</span>
+    </div>
     <%= render @user.sorted_posts %>
   </div>
   <div class="tab-pane" id="user_comments">
+    <div id='comment_vote_error' class='alert alert-error' style='display:none'>
+      <a class='close ajax_close'>x</a>
+      <span>You can only vote once.</span>
+    </div>
     <%= render @user.sorted_comments, refer_to_post: true %>
   </div>
 </div>
