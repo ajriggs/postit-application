@@ -1,4 +1,9 @@
-<% if logged_in? && (current_user == @post.author || current_user.is_admin?) %>
+<div id='comment_vote_error' class='row alert alert-error' style='display:none'>
+  <a class='close' data-dismiss='alert'>x</a>
+  <span>You can only vote once.</span>
+</div>
+
+<% if user_has_author_permissions? %>
   <p class ='pull-right'>
     [<%= link_to 'Edit Post', edit_post_path(@post) %>]
   </p>

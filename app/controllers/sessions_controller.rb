@@ -1,24 +1,20 @@
 class SessionsController < ApplicationController
   before_action :require_valid_password, only: [:authenticate]
 
-  def new
-  end
-
   def create
-    user = User.find_by(username: params[:username])
+    user = User.find_by username: params[:username]
     if user && user.authenticate(params[:password])
-      if user.two_factor?
+      unless user.two_factor?
+        login! user
+      else
         session[:two_factor_ready?] = true
         user.render_pin!
         user.send_pin_through_twilio
         redirect_to authenticate_path
-      else
-        login!(user)
       end
     else
       access_denied
     end
-
   end
 
   def destroy
@@ -33,7 +29,7 @@ class SessionsController < ApplicationController
       if user
         user.clear_pin!
         session[:two_factor_ready?] = nil
-        login!(user)
+        login! user
       else
         access_denied
       end
