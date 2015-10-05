@@ -3,7 +3,11 @@
 <div class='well'>
   <dl class='dl-horizontal'>
     <dt>Username:</dt>
-    <dd><%= @user.username %></dd>
+    <dd><%= @user.username %>
+      <% if @user.is_admin? %>
+        <strong>(admin)</strong>
+      <% end %>
+    </dd>
     <dt>Time Zone:</dt>
     <dd><%= @user.timezone %><dd>
   </dl>

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
         redirect_to authenticate_path
       end
     else
-      access_denied
+      login_failed
     end
   end
 
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
         session[:two_factor_ready?] = nil
         login! user
       else
-        access_denied
+        login_failed
       end
     end
   end
@@ -46,6 +46,11 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     flash[:notice] = "Welcome, #{user.username}!"
     redirect_to root_path
+  end
+
+  def login_failed
+      flash[:error] = "Oops! Your credentials were incorrect. Please try again."
+      redirect_to :back
   end
 
 end
