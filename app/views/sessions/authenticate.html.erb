@@ -1,8 +1,8 @@
-<%= render 'shared/content_title', title: 'Provide your Two-Factor PIN' %>
+<%= render 'shared/content_title', title: "Let's Authenticate!" %>
 <div class ='well'>
   <%= form_tag('/authenticate', method: 'post') do %>
     <div class='control-group'>
-      <%= label_tag :PIN %>
+      <%= label_tag :pin, 'Enter your PIN' %>
       <%= text_field_tag :pin %>
     </div>
     <div class='control-group'>
