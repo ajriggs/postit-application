@@ -12,27 +12,27 @@ class User < ActiveRecord::Base
   sluggable_column :username
 
   def sorted_posts
-    self.posts.all.sort_by{ |x| x.net_votes }.reverse
+    posts.all.sort_by{ |x| x.net_votes }.reverse
   end
 
   def sorted_comments
-    self.comments.all.sort_by{ |x| x.net_votes }.reverse
+    comments.all.sort_by{ |x| x.net_votes }.reverse
   end
 
   def is_admin?
-    self.role == 'admin'
+    role == 'admin'
   end
 
   def render_pin!
-    self.update_column(:pin, rand(10 ** 6))
+    update_column(:pin, rand(10 ** 6))
   end
 
   def two_factor?
-    !self.phone.blank?
+    !phone.blank?
   end
 
   def clear_pin!
-    self.update_column(:pin, nil)
+    update_column(:pin, nil)
   end
 
   def send_pin_through_twilio

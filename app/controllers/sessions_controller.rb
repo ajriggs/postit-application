@@ -49,8 +49,8 @@ class SessionsController < ApplicationController
   end
 
   def login_failed
-      flash[:error] = "Oops! Your credentials were incorrect. Please try again."
-      redirect_to :back
+    flash[:error] = "Oops! Your credentials were incorrect. Please try again."
+    redirect_to :back
   end
 
 end
